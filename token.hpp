@@ -1,29 +1,41 @@
-#include <istream>
+#ifndef TOKEN_HPP
+#define TOKEN_HPP
+
+#include <QFile>
+#include <QString>
+#include <QQueue>
 
 class Tokenizer;
 
 class Token
 {
   friend class Tokenizer;
-protected:
-  std::string _textVal;
 
+public:
   enum Type
   {
     ch,
     nl,
     eof
   };
-  Type _type;
-public:
 
+protected:
+  QString _textVal;
+  Type _type;
+
+public:
+  const Type &GetType() const { return _type; }
+  const QString &GetText() const { return _textVal; }
 };
 
 class Tokenizer
 {
 protected:
-  std::istream &_in;
-
+  QFile &_file;
+  QQueue<char> _buffer;
 public:
-
+  Tokenizer(QFile &file);
+  Token Next();
 };
+
+#endif // TOKEN_HPP
