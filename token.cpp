@@ -2,13 +2,18 @@
 #include <iostream>
 
 Tokenizer::Tokenizer(QFile &file)
-  : _file(file)
+  : _file(file), _saved(false)
 {
 }
 
 Token Tokenizer::Next()
 {
   Token ret;
+  if (_saved)
+  {
+    _saved = false;
+    return _savedToken;
+  }
   if (!_buffer.size())
   {
     QByteArray bytes(1024, '\0');
@@ -57,4 +62,11 @@ Token Tokenizer::Next()
       ret._type = Token::ch;
   }
   return ret;
+}
+
+const Token &Tokenizer::Peek()
+{
+  _savedToken = Next();
+  _saved = true;
+  return _savedToken;
 }

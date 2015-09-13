@@ -26,8 +26,9 @@ class ExprParenthesis
 protected:
   Expr *_subExpr;
 public:
-  virtual const QString ToString() const override { return subExpr->ToString(); }
-  virtual void Simplify() override { _subExpr->Simplify(); }
+  ExprParenthesis(Expr *subExpr) : _subExpr(subExpr) { }
+  virtual const QString ToString() const override { return "(" + subExpr->ToString() + ")"; }
+  virtual Expr *Simplify() override { return new ExprParenthesis(_subExpr->Simplify()); }
 };
 
 #endif // EXPR_HPP

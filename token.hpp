@@ -31,11 +31,14 @@ public:
 class Tokenizer
 {
 protected:
+  Token _savedToken;
+  bool _saved;
   QFile &_file;
   QQueue<char> _buffer;
 public:
   Tokenizer(QFile &file);
   Token Next();
+  const Token &Peek();
 };
 
 #endif // TOKEN_HPP
