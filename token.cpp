@@ -1,5 +1,5 @@
-#include "token.hpp"
 #include <iostream>
+#include "token.hpp"
 
 Tokenizer::Tokenizer(QFile &file)
   : _file(file), _saved(false)

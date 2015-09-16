@@ -14,8 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    token.cpp \
-    parser.cpp
+        token.cpp \
+        parser.cpp
 
 HEADERS  += expr.hpp mainwindow.h parser.hpp token.hpp
 
